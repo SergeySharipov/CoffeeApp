@@ -1,6 +1,7 @@
 package ua.dp.sergey.coffeeapp.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder {
 
     public static final String CUSTOMER_ID = "ua.dp.sergey.coffeeapp.activity.CUSTOMER_ID";
     private String mCustomerId;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private ArrayList<Order> mOrders;
     private ServerAPIHelper mServerAPIHelper;
@@ -47,6 +49,15 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder {
 
         mServerAPIHelper = new ServerAPIHelper(this);
         mServerAPIHelper.getOrders(mCustomerId);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updateListItems();
+            }
+        });
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -55,6 +66,7 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder {
         mOrders.addAll(list);
 
         ((OrdersAdapter) mRecyclerView.getAdapter()).swap(mOrders);
+        mSwipeRefreshLayout.setRefreshing(false);
         showMessage("updateListItems");
     }
 

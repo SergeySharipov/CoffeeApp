@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/swipeRefreshLayout"
     tools:context=".activity.MainActivity">
 
     <android.support.v7.widget.RecyclerView
@@ -12,4 +13,4 @@
         android:layout_height="match_parent"
         android:id="@+id/customers_recycle_view"/>
 
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout >
