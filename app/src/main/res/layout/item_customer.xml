@@ -14,15 +14,25 @@
         android:orientation="vertical"
         android:layout_margin="5dp">
         <TextView
-            android:id="@+id/postitem_post"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="null"/>
-
-        <TextView
-            android:id="@+id/postitem_site"
+            android:id="@+id/tv_first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

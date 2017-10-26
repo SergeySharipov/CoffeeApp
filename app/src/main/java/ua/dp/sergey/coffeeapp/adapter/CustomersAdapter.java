@@ -36,8 +36,10 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Customer customer = mCustomerList.get(position);
 
-        holder.post.setText(customer.getAddress());
-        holder.site.setText(customer.getFirstName());
+        holder.firstName.setText(customer.getFirstName());
+        holder.lastName.setText(customer.getLastName());
+        holder.phone.setText(customer.getPhone());
+        holder.address.setText(customer.getAddress());
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,14 +67,18 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView mCardView;
-        TextView post;
-        TextView site;
+        TextView firstName;
+        TextView lastName;
+        TextView phone;
+        TextView address;
 
         ViewHolder(View itemView) {
             super(itemView);
             mCardView = itemView.findViewById(R.id.card_view);
-            post = (TextView) itemView.findViewById(R.id.postitem_post);
-            site = (TextView) itemView.findViewById(R.id.postitem_site);
+            firstName = (TextView) itemView.findViewById(R.id.tv_first_name);
+            lastName = (TextView) itemView.findViewById(R.id.tv_last_name);
+            phone = (TextView) itemView.findViewById(R.id.tv_phone);
+            address = (TextView) itemView.findViewById(R.id.tv_address);
         }
     }
 }

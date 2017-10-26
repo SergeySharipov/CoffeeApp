@@ -26,7 +26,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_customer, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order, parent, false);
         return new ViewHolder(v);
     }
 
@@ -34,8 +34,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Order post = mOrderList.get(position);
 
-        holder.post.setText(post.getCustomerId());
-        holder.site.setText(post.getDateCreate());
+        holder.type.setText(post.getType());
+        holder.weight.setText(post.getWeight());
+        holder.dateCreate.setText(post.getDateCreate());
+        holder.dateDelivery.setText(post.getDateDelivery());
     }
 
     public void swap(@NonNull ArrayList<Order> OrderList){
@@ -51,13 +53,17 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView post;
-        TextView site;
+        TextView type;
+        TextView weight;
+        TextView dateCreate;
+        TextView dateDelivery;
 
         ViewHolder(View itemView) {
             super(itemView);
-            post = (TextView) itemView.findViewById(R.id.postitem_post);
-            site = (TextView) itemView.findViewById(R.id.postitem_site);
+            type = (TextView) itemView.findViewById(R.id.tv_type);
+            weight = (TextView) itemView.findViewById(R.id.tv_weight);
+            dateCreate = (TextView) itemView.findViewById(R.id.tv_date_create);
+            dateDelivery = (TextView) itemView.findViewById(R.id.tv_date_delivery);
         }
     }
 }

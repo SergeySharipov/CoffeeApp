@@ -13,14 +13,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="5dp">
-        <TextView
-            android:id="@+id/postitem_post"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="null"/>
 
         <TextView
-            android:id="@+id/postitem_site"
+            android:id="@+id/tv_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_date_create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_date_delivery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
