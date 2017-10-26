@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="Add"
+        android:id="@+id/add_but"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_add"/>
+
+    <item
+        android:title="About App"
+        android:id="@+id/about_but"
+        app:showAsAction="withText"/>
+
+</menu>
