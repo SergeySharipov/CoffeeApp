@@ -67,8 +67,8 @@ public class AddOrderDialogFragment extends DialogFragment implements View.OnCli
 
                 mServerAPIHelper.addOrder(order);
             case R.id.cancel_but:
-                mIDialogCloseListener.onCloseDialog();
                 getDialog().onBackPressed();
+                mIDialogCloseListener.onCloseDialog();
                 break;
         }
     }

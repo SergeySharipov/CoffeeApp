@@ -53,8 +53,8 @@ public class AddCustomerDialogFragment extends DialogFragment implements View.On
 
                 mServerAPIHelper.addCustomer(customer);
             case R.id.cancel_but:
-                mIDialogCloseListener.onCloseDialog();
                 getDialog().onBackPressed();
+                mIDialogCloseListener.onCloseDialog();
                 break;
         }
     }
