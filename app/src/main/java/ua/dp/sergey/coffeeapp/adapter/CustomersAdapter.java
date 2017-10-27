@@ -44,7 +44,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.View
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCustomerClickListener.onCustomerClicked(customer.getId());
+                mCustomerClickListener.onCustomerClick(customer.getId());
             }
         });
     }

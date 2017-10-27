@@ -32,6 +32,16 @@ public class Customer {
     @Expose
     private Integer version;
 
+    public Customer(String firstName, String lastName, String address, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    public Customer() {
+    }
+
     public String getId() {
         return id;
     }

@@ -30,18 +30,24 @@ public class ServerAPIHelper implements IServerAPI {
         mIClientOrder = iClientOrder;
     }
 
+    public ServerAPIHelper() {
+    }
+
     @Override
     public Call<List<Customer>> getCustomers() {
+
         App.getApi().getCustomers().enqueue(new Callback<List<Customer>>() {
             @Override
             public void onResponse(Call<List<Customer>> call, Response<List<Customer>> response) {
                 Log.e(LOG_NAME, response.message());
-                mIClientCustomer.updateListItems(response.body());
+                if (mIClientCustomer != null) {
+                    mIClientCustomer.updateListItems(response.body());
+                }
             }
 
             @Override
             public void onFailure(Call<List<Customer>> call, Throwable t) {
-                mIClientCustomer.showMessage(t.getMessage());
+                Log.e(LOG_NAME, t.getMessage());
             }
         });
         return null;
@@ -57,7 +63,7 @@ public class ServerAPIHelper implements IServerAPI {
 
             @Override
             public void onFailure(Call<Customer> call, Throwable t) {
-                mIClientCustomer.showMessage(t.getMessage());
+                Log.e(LOG_NAME, t.getMessage());
             }
         });
         return null;
@@ -69,12 +75,11 @@ public class ServerAPIHelper implements IServerAPI {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
                 Log.e(LOG_NAME, response.message());
-                mIClientCustomer.updateListItems();
             }
 
             @Override
             public void onFailure(Call<Customer> call, Throwable t) {
-                mIClientCustomer.showMessage(t.getMessage());
+                Log.e(LOG_NAME, t.getMessage());
             }
         });
         return null;
@@ -86,129 +91,131 @@ public class ServerAPIHelper implements IServerAPI {
             @Override
             public void onResponse(Call<Customer> call, Response<Customer> response) {
                 Log.e(LOG_NAME, response.message());
-                mIClientCustomer.updateListItems();
             }
 
             @Override
             public void onFailure(Call<Customer> call, Throwable t) {
-                mIClientCustomer.showMessage(t.getMessage());
+                Log.e(LOG_NAME, t.getMessage());
             }
         });
         return null;
-        }
-
-        @Override
-        public Call<Customer> deleteCustomer (@Path("id") String id){
-            App.getApi().deleteCustomer(id).enqueue(new Callback<Customer>() {
-                @Override
-                public void onResponse(Call<Customer> call, Response<Customer> response) {
-                    Log.e(LOG_NAME, response.message());
-                    mIClientCustomer.updateListItems();
-                }
-
-                @Override
-                public void onFailure(Call<Customer> call, Throwable t) {
-                    mIClientCustomer.showMessage(t.getMessage());
-                }
-            });
-            return null;
-        }
-
-        @Override
-        public Call<List<Order>> getOrders () {
-            App.getApi().getOrders().enqueue(new Callback<List<Order>>() {
-                @Override
-                public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                    Log.e(LOG_NAME, response.message());
-                    mIClientOrder.updateListItems(response.body());
-                }
-
-                @Override
-                public void onFailure(Call<List<Order>> call, Throwable t) {
-                    mIClientOrder.showMessage(t.getMessage());
-                }
-            });
-            return null;
-        }
-
-        @Override
-        public Call<List<Order>> getOrders (@Path("customer_id") String customerId){
-            App.getApi().getOrders(customerId).enqueue(new Callback<List<Order>>() {
-                @Override
-                public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                    Log.e(LOG_NAME, response.message());
-                    mIClientOrder.updateListItems(response.body());
-                }
-
-                @Override
-                public void onFailure(Call<List<Order>> call, Throwable t) {
-                    mIClientOrder.showMessage(t.getMessage());
-                }
-            });
-            return null;
-        }
-
-        @Override
-        public Call<Order> getOrder (@Path("id") String id){
-            App.getApi().getOrder(id).enqueue(new Callback<Order>() {
-                @Override
-                public void onResponse(Call<Order> call, Response<Order> response) {
-                    Log.e(LOG_NAME, response.message());
-                }
-
-                @Override
-                public void onFailure(Call<Order> call, Throwable t) {
-                    mIClientOrder.showMessage(t.getMessage());
-                }
-            });
-            return null;
-        }
-
-        @Override
-        public Call<Order> addOrder (@Body Order order){
-            App.getApi().addOrder(order).enqueue(new Callback<Order>() {
-                @Override
-                public void onResponse(Call<Order> call, Response<Order> response) {
-                    Log.e(LOG_NAME, response.message());
-                }
-
-                @Override
-                public void onFailure(Call<Order> call, Throwable t) {
-                    mIClientOrder.showMessage(t.getMessage());
-                }
-            });
-            return null;
-        }
-
-        @Override
-        public Call<Order> updateOrder (@Path("id") String id, @Body Order order){
-            App.getApi().updateOrder(id, order).enqueue(new Callback<Order>() {
-                @Override
-                public void onResponse(Call<Order> call, Response<Order> response) {
-                    Log.e(LOG_NAME, response.message());
-                }
-
-                @Override
-                public void onFailure(Call<Order> call, Throwable t) {
-                    mIClientOrder.showMessage(t.getMessage());
-                }
-            });
-            return null;
-        }
-
-        @Override
-        public Call<Order> deleteOrder (@Path("id") String id){
-            App.getApi().deleteOrder(id).enqueue(new Callback<Order>() {
-                @Override
-                public void onResponse(Call<Order> call, Response<Order> response) {
-                    Log.e(LOG_NAME, response.message());
-                }
-
-                @Override
-                public void onFailure(Call<Order> call, Throwable t) {
-                    mIClientOrder.showMessage(t.getMessage());
-                }
-            });
-            return null;
-        }
     }
+
+    @Override
+    public Call<Customer> deleteCustomer(@Path("id") String id) {
+        App.getApi().deleteCustomer(id).enqueue(new Callback<Customer>() {
+            @Override
+            public void onResponse(Call<Customer> call, Response<Customer> response) {
+                Log.e(LOG_NAME, response.message());
+            }
+
+            @Override
+            public void onFailure(Call<Customer> call, Throwable t) {
+                Log.e(LOG_NAME, t.getMessage());
+            }
+        });
+        return null;
+    }
+
+    @Override
+    public Call<List<Order>> getOrders() {
+        App.getApi().getOrders().enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                Log.e(LOG_NAME, response.message());
+                if (mIClientOrder != null) {
+                    mIClientOrder.updateListItems(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Log.e(LOG_NAME, t.getMessage());
+            }
+        });
+        return null;
+    }
+
+    @Override
+    public Call<List<Order>> getOrders(@Path("customer_id") String customerId) {
+        App.getApi().getOrders(customerId).enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                Log.e(LOG_NAME, response.message());
+                if (mIClientOrder != null) {
+                    mIClientOrder.updateListItems(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Log.e(LOG_NAME, t.getMessage());
+            }
+        });
+        return null;
+    }
+
+    @Override
+    public Call<Order> getOrder(@Path("id") String id) {
+        App.getApi().getOrder(id).enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                Log.e(LOG_NAME, response.message());
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                Log.e(LOG_NAME, t.getMessage());
+            }
+        });
+        return null;
+    }
+
+    @Override
+    public Call<Order> addOrder(@Body Order order) {
+        App.getApi().addOrder(order).enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                Log.e(LOG_NAME, response.message());
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                Log.e(LOG_NAME, t.getMessage());
+            }
+        });
+        return null;
+    }
+
+    @Override
+    public Call<Order> updateOrder(@Path("id") String id, @Body Order order) {
+        App.getApi().updateOrder(id, order).enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                Log.e(LOG_NAME, response.message());
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                Log.e(LOG_NAME, t.getMessage());
+            }
+        });
+        return null;
+    }
+
+    @Override
+    public Call<Order> deleteOrder(@Path("id") String id) {
+        App.getApi().deleteOrder(id).enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                Log.e(LOG_NAME, response.message());
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                Log.e(LOG_NAME, t.getMessage());
+            }
+        });
+        return null;
+    }
+}

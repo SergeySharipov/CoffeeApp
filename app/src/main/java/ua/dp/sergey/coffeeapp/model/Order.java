@@ -68,6 +68,17 @@ public class Order {
     @Expose
     private Integer version;
 
+    public Order(String customerId, String type, String weight, String dateCreate, String dateDelivery) {
+        this.customerId = customerId;
+        this.type = type;
+        this.weight = weight;
+        this.dateCreate = dateCreate;
+        this.dateDelivery = dateDelivery;
+    }
+
+    public Order() {
+    }
+
     public String getId() {
         return id;
     }

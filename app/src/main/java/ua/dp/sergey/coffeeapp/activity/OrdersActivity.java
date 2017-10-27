@@ -1,5 +1,7 @@
 package ua.dp.sergey.coffeeapp.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,11 +19,11 @@ import ua.dp.sergey.coffeeapp.R;
 import ua.dp.sergey.coffeeapp.adapter.OrdersAdapter;
 import ua.dp.sergey.coffeeapp.api.IClientOrder;
 import ua.dp.sergey.coffeeapp.api.ServerAPIHelper;
-import ua.dp.sergey.coffeeapp.dialogfragment.AddCustomerDialogFragment;
 import ua.dp.sergey.coffeeapp.dialogfragment.AddOrderDialogFragment;
+import ua.dp.sergey.coffeeapp.dialogfragment.IDialogCloseListener;
 import ua.dp.sergey.coffeeapp.model.Order;
 
-public class OrdersActivity extends AppCompatActivity implements IClientOrder {
+public class OrdersActivity extends AppCompatActivity implements IClientOrder,IDialogCloseListener {
 
     public static final String CUSTOMER_ID = "ua.dp.sergey.coffeeapp.activity.CUSTOMER_ID";
     private String mCustomerId;
@@ -29,6 +31,12 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder {
     private RecyclerView mRecyclerView;
     private ArrayList<Order> mOrders;
     private ServerAPIHelper mServerAPIHelper;
+
+    public static Intent newIntent(Context context, String customerId) {
+        Intent intent = new Intent(context, OrdersActivity.class);
+        intent.putExtra(CUSTOMER_ID, customerId);
+        return intent;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,7 +49,9 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_but:
-                AddOrderDialogFragment addOrderDialogFragment = new AddOrderDialogFragment();
+                AddOrderDialogFragment addOrderDialogFragment =
+                        AddOrderDialogFragment.newInstance(mCustomerId);
+                addOrderDialogFragment.setIDialogCloseListener(this);
                 addOrderDialogFragment.show(getSupportFragmentManager(),
                         "AddOrderDialogFragment");
                 return true;
@@ -106,5 +116,10 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder {
     @Override
     public void showMessage(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCloseDialog() {
+        updateListItems();
     }
 }

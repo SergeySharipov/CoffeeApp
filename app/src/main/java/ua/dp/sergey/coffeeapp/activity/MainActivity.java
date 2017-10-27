@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,9 +20,11 @@ import ua.dp.sergey.coffeeapp.adapter.ICustomerClickListener;
 import ua.dp.sergey.coffeeapp.api.ServerAPIHelper;
 import ua.dp.sergey.coffeeapp.api.IClientCustomer;
 import ua.dp.sergey.coffeeapp.dialogfragment.AddCustomerDialogFragment;
+import ua.dp.sergey.coffeeapp.dialogfragment.IDialogCloseListener;
 import ua.dp.sergey.coffeeapp.model.Customer;
 
-public class MainActivity extends AppCompatActivity implements IClientCustomer, ICustomerClickListener {
+public class MainActivity extends AppCompatActivity implements IClientCustomer,
+        ICustomerClickListener, IDialogCloseListener {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer, 
         switch (item.getItemId()) {
             case R.id.add_but:
                 AddCustomerDialogFragment addCustomerDialogFragment = new AddCustomerDialogFragment();
+                addCustomerDialogFragment.setIDialogCloseListener(this);
                 addCustomerDialogFragment.show(getSupportFragmentManager(),
                         "AddCustomerDialogFragment");
                 return true;
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer, 
         mRecyclerView.setAdapter(adapter);
 
         mServerAPIHelper = new ServerAPIHelper(this);
-        mServerAPIHelper.getCustomers();
+        updateListItems();
 
         mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -92,9 +94,8 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer, 
     }
 
     @Override
-    public void onCustomerClicked(String customerId) {
-        Intent intent = new Intent(this, OrdersActivity.class);
-        intent.putExtra(OrdersActivity.CUSTOMER_ID, customerId);
+    public void onCustomerClick(String customerId) {
+        Intent intent = OrdersActivity.newIntent(this,customerId);
         startActivity(intent);
     }
 
@@ -111,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer, 
     @Override
     public void updateListItems() {
         mServerAPIHelper.getCustomers();
-        showMessage("updateListItems");
+    }
+
+    @Override
+    public void onCloseDialog() {
+        updateListItems();
     }
 }
