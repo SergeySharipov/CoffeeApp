@@ -17,6 +17,8 @@ import ua.dp.sergey.coffeeapp.R;
 import ua.dp.sergey.coffeeapp.adapter.OrdersAdapter;
 import ua.dp.sergey.coffeeapp.api.IClientOrder;
 import ua.dp.sergey.coffeeapp.api.ServerAPIHelper;
+import ua.dp.sergey.coffeeapp.dialogfragment.AddCustomerDialogFragment;
+import ua.dp.sergey.coffeeapp.dialogfragment.AddOrderDialogFragment;
 import ua.dp.sergey.coffeeapp.model.Order;
 
 public class OrdersActivity extends AppCompatActivity implements IClientOrder {
@@ -39,7 +41,9 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_but:
-                //
+                AddOrderDialogFragment addOrderDialogFragment = new AddOrderDialogFragment();
+                addOrderDialogFragment.show(getSupportFragmentManager(),
+                        "AddOrderDialogFragment");
                 return true;
             case R.id.about_but:
                 //

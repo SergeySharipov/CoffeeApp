@@ -20,6 +20,7 @@ import ua.dp.sergey.coffeeapp.adapter.CustomersAdapter;
 import ua.dp.sergey.coffeeapp.adapter.ICustomerClickListener;
 import ua.dp.sergey.coffeeapp.api.ServerAPIHelper;
 import ua.dp.sergey.coffeeapp.api.IClientCustomer;
+import ua.dp.sergey.coffeeapp.dialogfragment.AddCustomerDialogFragment;
 import ua.dp.sergey.coffeeapp.model.Customer;
 
 public class MainActivity extends AppCompatActivity implements IClientCustomer, ICustomerClickListener {
@@ -40,7 +41,9 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer, 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_but:
-                //
+                AddCustomerDialogFragment addCustomerDialogFragment = new AddCustomerDialogFragment();
+                addCustomerDialogFragment.show(getSupportFragmentManager(),
+                        "AddCustomerDialogFragment");
                 return true;
             case R.id.about_but:
                 //
