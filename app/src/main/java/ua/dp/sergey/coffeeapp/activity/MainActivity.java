@@ -165,6 +165,8 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer,
 
                     if(dX > 0){
                         p.setColor(getResources().getColor(R.color.Green));
+                        if(dX/2<255)
+                            p.setAlpha((int) dX/2);
                         RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), (itemView.getRight()/2)+dX,(float) itemView.getBottom());
                         c.drawRect(background,p);
                         icon = BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_menu_edit);
@@ -172,6 +174,8 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer,
                         c.drawBitmap(icon,null,icon_dest,p);
                     } else if(dX < 0) {
                         p.setColor(getResources().getColor(R.color.Red));
+                        if((dX*-1)/2<255)
+                            p.setAlpha((int) (dX*-1)/2);
                         RectF background = new RectF((float) (itemView.getRight()/2)+dX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
                         c.drawRect(background,p);
                         icon = BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_menu_delete);
