@@ -65,6 +65,12 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.View
         return mCustomerList.size();
     }
 
+    public void removeItem(int position) {
+        mCustomerList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mCustomerList.size());
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView mCardView;
         TextView firstName;
