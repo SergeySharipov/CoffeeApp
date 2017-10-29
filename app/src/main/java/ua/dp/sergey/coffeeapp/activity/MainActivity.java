@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer,
     private RecyclerView mRecyclerView;
     private ArrayList<Customer> mCustomers;
     private ServerAPIHelper mServerAPIHelper;
-    private Paint p = new Paint();
+    private Paint p = new Paint(Paint.FILTER_BITMAP_FLAG);
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
