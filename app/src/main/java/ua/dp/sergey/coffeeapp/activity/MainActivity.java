@@ -165,19 +165,21 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer,
 
                     if(dX > 0){
                         p.setColor(getResources().getColor(R.color.Green));
-                        if(dX/2<255)
-                            p.setAlpha((int) dX/2);
+                        int alpha=(int)dX/2;
+                        if(alpha<255)
+                            p.setAlpha(alpha);
                         RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), (itemView.getRight()/2)+dX,(float) itemView.getBottom());
-                        c.drawRect(background,p);
+                        c.drawRoundRect(background,10,10,p);
                         icon = BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_menu_edit);
                         RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
                         c.drawBitmap(icon,null,icon_dest,p);
                     } else if(dX < 0) {
                         p.setColor(getResources().getColor(R.color.Red));
-                        if((dX*-1)/2<255)
-                            p.setAlpha((int) (dX*-1)/2);
+                        int alpha=(int)(dX*-1)/2;
+                        if(alpha<255)
+                            p.setAlpha(alpha);
                         RectF background = new RectF((float) (itemView.getRight()/2)+dX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
-                        c.drawRect(background,p);
+                        c.drawRoundRect(background,10,10,p);
                         icon = BitmapFactory.decodeResource(getResources(), android.R.drawable.ic_menu_delete);
                         RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
                         c.drawBitmap(icon,null,icon_dest,p);
