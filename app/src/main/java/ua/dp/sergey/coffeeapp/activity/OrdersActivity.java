@@ -82,6 +82,7 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder,ID
         mRecyclerView.setLayoutManager(layoutManager);
 
         OrdersAdapter adapter = new OrdersAdapter(mOrders);
+        adapter.initSwipe(mRecyclerView);
         mRecyclerView.setAdapter(adapter);
 
         mServerAPIHelper = new ServerAPIHelper(this);
