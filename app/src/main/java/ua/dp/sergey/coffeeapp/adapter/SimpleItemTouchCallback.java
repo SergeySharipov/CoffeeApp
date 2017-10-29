@@ -15,27 +15,27 @@ import ua.dp.sergey.coffeeapp.R;
  */
 
 public class SimpleItemTouchCallback extends ItemTouchHelper.SimpleCallback {
-    private Context mContext;
     private ISimpleItemTouchCallback mISimpleItemTouchCallback;
     private Paint mPaint = new Paint(Paint.FILTER_BITMAP_FLAG);
     private SwipeDrawHelper mSwipeDrawHelper;
     private Bitmap mIconEdit, mIconDelete, mTempIcon;
     private int mGreenColor, mRedColor, mTempColor;
 
-    public SimpleItemTouchCallback(Context context,
-                                   ISimpleItemTouchCallback iSimpleItemTouchCallback) {
+    SimpleItemTouchCallback(Context context,
+                            ISimpleItemTouchCallback iSimpleItemTouchCallback) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
-        mContext = context;
+
         this.mISimpleItemTouchCallback = iSimpleItemTouchCallback;
 
         mSwipeDrawHelper = new SwipeDrawHelper();
 
-        mIconEdit = BitmapFactory.decodeResource(mContext.getResources(),
+        mIconEdit = BitmapFactory.decodeResource(context.getResources(),
                 android.R.drawable.ic_menu_edit);
-        mIconDelete = BitmapFactory.decodeResource(mContext.getResources(),
+        mIconDelete = BitmapFactory.decodeResource(context.getResources(),
                 android.R.drawable.ic_menu_delete);
-        mGreenColor = mContext.getResources().getColor(R.color.Green);
-        mRedColor = mContext.getResources().getColor(R.color.Red);
+
+        mGreenColor = context.getResources().getColor(R.color.Green);
+        mRedColor = context.getResources().getColor(R.color.Red);
     }
 
     @Override
