@@ -2,6 +2,7 @@ package ua.dp.sergey.coffeeapp.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import ua.dp.sergey.coffeeapp.model.Order;
  * Created by Sergey-PC on 24.10.2017.
  */
 
-public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
+public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> implements ISimpleItemTouchCallback {
 
     private ArrayList<Order> mOrderList;
 
@@ -50,6 +51,25 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         if (mOrderList == null)
             return 0;
         return mOrderList.size();
+    }
+
+    @Override
+    public void removeItem(int position) {
+        mOrderList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mOrderList.size());
+    }
+
+    @Override
+    public void editItem(int position) {
+        //ToDo
+    }
+
+    public void initSwipe(RecyclerView recyclerView){
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new SimpleItemTouchCallback(
+                recyclerView.getContext(),this);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
