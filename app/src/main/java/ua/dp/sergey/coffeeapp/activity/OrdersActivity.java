@@ -51,7 +51,7 @@ public class OrdersActivity extends AppCompatActivity implements IClientOrder,ID
             case R.id.add_but:
                 AddOrderDialogFragment addOrderDialogFragment =
                         AddOrderDialogFragment.newInstance(mCustomerId);
-                addOrderDialogFragment.setIDialogCloseListener(this);
+               // addOrderDialogFragment.setIDialogCloseListener(this);
                 addOrderDialogFragment.show(getSupportFragmentManager(),
                         "AddOrderDialogFragment");
                 return true;

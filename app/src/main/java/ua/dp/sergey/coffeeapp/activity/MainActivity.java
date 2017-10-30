@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements IClientCustomer,
         switch (item.getItemId()) {
             case R.id.add_but:
                 AddCustomerDialogFragment addCustomerDialogFragment = new AddCustomerDialogFragment();
-                addCustomerDialogFragment.setIDialogCloseListener(this);
+             //   addCustomerDialogFragment.setIDialogCloseListener(this);
                 addCustomerDialogFragment.show(getSupportFragmentManager(),
                         "AddCustomerDialogFragment");
                 return true;

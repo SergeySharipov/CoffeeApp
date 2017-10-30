@@ -1,5 +1,6 @@
 package ua.dp.sergey.coffeeapp.dialogfragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -33,10 +34,6 @@ public class AddOrderDialogFragment extends DialogFragment implements View.OnCli
         return addOrderDialogFragment;
     }
 
-    public void setIDialogCloseListener(IDialogCloseListener IDialogCloseListener) {
-        mIDialogCloseListener = IDialogCloseListener;
-    }
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().setTitle("Add Order!");
         View v = inflater.inflate(R.layout.dialogfragment_add_order, null);
@@ -44,6 +41,7 @@ public class AddOrderDialogFragment extends DialogFragment implements View.OnCli
         mCustomerId = getArguments().getString(CUSTOMER_ID);
 
         v.findViewById(R.id.add_but).setOnClickListener(this);
+        v.findViewById(R.id.cancel_but).setOnClickListener(this);
 
         mType = v.findViewById(R.id.et_type);
         mWeight = v.findViewById(R.id.et_weight);
@@ -55,8 +53,18 @@ public class AddOrderDialogFragment extends DialogFragment implements View.OnCli
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mIDialogCloseListener = (IDialogCloseListener)context;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface
+        }
+    }
+
+    @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.add_but:
                 String type = mType.getText().toString();
                 String weight = mWeight.getText().toString();
@@ -69,7 +77,8 @@ public class AddOrderDialogFragment extends DialogFragment implements View.OnCli
             case R.id.cancel_but:
                 getDialog().onBackPressed();
 
-                mIDialogCloseListener.onCloseDialog();
+                if (mIDialogCloseListener != null)
+                    mIDialogCloseListener.onCloseDialog();
                 break;
         }
     }

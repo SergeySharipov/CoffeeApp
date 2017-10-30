@@ -1,5 +1,6 @@
 package ua.dp.sergey.coffeeapp.dialogfragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -24,7 +25,9 @@ public class AddCustomerDialogFragment extends DialogFragment implements View.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().setTitle("Add Customer");
         View v = inflater.inflate(R.layout.dialogfragment_add_customer, null);
+
         v.findViewById(R.id.add_but).setOnClickListener(this);
+        v.findViewById(R.id.cancel_but).setOnClickListener(this);
 
         mFirstName = v.findViewById(R.id.et_first_name);
         mLastName = v.findViewById(R.id.et_last_name);
@@ -36,8 +39,14 @@ public class AddCustomerDialogFragment extends DialogFragment implements View.On
         return v;
     }
 
-    public void setIDialogCloseListener(IDialogCloseListener IDialogCloseListener) {
-        mIDialogCloseListener = IDialogCloseListener;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mIDialogCloseListener = (IDialogCloseListener)context;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface
+        }
     }
 
     @Override
@@ -55,7 +64,8 @@ public class AddCustomerDialogFragment extends DialogFragment implements View.On
             case R.id.cancel_but:
                 getDialog().onBackPressed();
 
-                mIDialogCloseListener.onCloseDialog();
+                if (mIDialogCloseListener != null)
+                    mIDialogCloseListener.onCloseDialog();
                 break;
         }
     }
