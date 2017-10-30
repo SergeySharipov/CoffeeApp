@@ -36,18 +36,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Customer customer = mCustomerList.get(position);
-
-        holder.firstName.setText(customer.getFirstName());
-        holder.lastName.setText(customer.getLastName());
-        holder.phone.setText(customer.getPhone());
-        holder.address.setText(customer.getAddress());
-
-        holder.mCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCustomerClickListener.onCustomerClick(customer.getId());
-            }
-        });
+        holder.onBind(customer);
     }
 
     public void swap(@NonNull ArrayList<Customer> customerList){
@@ -99,6 +88,20 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.View
             lastName = (TextView) itemView.findViewById(R.id.tv_last_name);
             phone = (TextView) itemView.findViewById(R.id.tv_phone);
             address = (TextView) itemView.findViewById(R.id.tv_address);
+        }
+
+        void onBind(final Customer customer){
+            firstName.setText(customer.getFirstName());
+            lastName.setText(customer.getLastName());
+            phone.setText(customer.getPhone());
+            address.setText(customer.getAddress());
+
+            mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCustomerClickListener.onCustomerClick(customer.getId());
+                }
+            });
         }
     }
 }

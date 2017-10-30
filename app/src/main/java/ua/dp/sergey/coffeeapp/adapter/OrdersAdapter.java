@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ua.dp.sergey.coffeeapp.R;
+import ua.dp.sergey.coffeeapp.model.Customer;
 import ua.dp.sergey.coffeeapp.model.Order;
 
 /**
@@ -33,12 +34,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Order post = mOrderList.get(position);
-
-        holder.type.setText(post.getType());
-        holder.weight.setText(post.getWeight());
-        holder.dateCreate.setText(post.getDateCreate());
-        holder.dateDelivery.setText(post.getDateDelivery());
+        Order order = mOrderList.get(position);
+        holder.onBind(order);
     }
 
     public void swap(@NonNull ArrayList<Order> OrderList){
@@ -84,6 +81,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             weight = (TextView) itemView.findViewById(R.id.tv_weight);
             dateCreate = (TextView) itemView.findViewById(R.id.tv_date_create);
             dateDelivery = (TextView) itemView.findViewById(R.id.tv_date_delivery);
+        }
+
+        void onBind(final Order order){
+            type.setText(order.getType());
+            weight.setText(order.getWeight());
+            dateCreate.setText(order.getDateCreate());
+            dateDelivery.setText(order.getDateDelivery());
         }
     }
 }
