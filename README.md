@@ -12,10 +12,8 @@ recyclerview;
 cardview;
 
 # Screenshots
-<table style="width:100%">
-  <tr>
-    <img src="https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen1.jpg" width="200"/>
-    <img src="https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen2.jpg" width="200"/>
-    <img src="https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen3.jpg" width="200"/>
-  </tr>
-</table>
+<p float="left">
+  <img src="https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen3.jpg" width="200"/>
+  <img src="https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen1.jpg" width="200"/>
+  <img src="https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen2.jpg" width="200"/>
+</p>
