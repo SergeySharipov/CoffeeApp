@@ -12,6 +12,6 @@ recyclerview;
 cardview;
 
 # Screenshots
-![Screenshot](screen1.png)
-![Screenshot](screen2.png)
-![Screenshot](screen3.png)
+![Screenshot](https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen1.jpg)
+![Screenshot](https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen2.jpg)
+![Screenshot](https://github.com/SergeySharipov/CoffeeApp/blob/master/screenshots/screen3.jpg)
